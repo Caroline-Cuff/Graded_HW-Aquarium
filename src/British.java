@@ -29,7 +29,7 @@ public class British {
         height = 90;
         isAlive = true;
  
-    } // constructor
+     // constructor
     }
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {

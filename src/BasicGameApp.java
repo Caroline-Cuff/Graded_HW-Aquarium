@@ -44,8 +44,8 @@ public class BasicGameApp implements Runnable {
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
-	private British tea;
-    private British queen;
+	private tea earlg;
+    private queen liz;
 
 
    // Main method definition
@@ -53,7 +53,12 @@ public class BasicGameApp implements Runnable {
 	public static void main(String[] args) {
 		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
 		new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method  
-	}
+
+
+
+    }
+
+
 
 
    // Constructor Method
@@ -67,9 +72,10 @@ public class BasicGameApp implements Runnable {
       //variable and objects
       //create (construct) the objects needed for the game and load up 
 		teaPic = Toolkit.getDefaultToolkit().getImage("tea.jpg"); //load the picture
-		tea = new British(10,100);
+		earlg = new tea(10,100);
         queenPic = Toolkit.getDefaultToolkit().getImage("queen.png");
-        queen = new British (20,20);
+        liz = new queen (20,20);
+
 
 
 	}// BasicGameApp()
@@ -97,8 +103,8 @@ public class BasicGameApp implements Runnable {
 	public void moveThings()
 	{
       //calls the move( ) code in the objects
-		tea.move();
-        queen.move();
+		earlg.move();
+        liz.move();
 
 	}
 	
@@ -149,8 +155,8 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
-		g.drawImage(teaPic, tea.xpos, tea.ypos, tea.width, tea.height, null);
-        g.drawImage(queenPic, queen.xpos, queen.ypos,queen.width, tea.height,null);
+		g.drawImage(teaPic, earlg.xpos, earlg.ypos, earlg.width, earlg.height, null);
+        g.drawImage(queenPic, liz.xpos, liz.ypos,liz.width, liz.height,null);
 
 		g.dispose();
 
