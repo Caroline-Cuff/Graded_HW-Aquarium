@@ -20,8 +20,8 @@ public class tea {
             ypos = pypos;
             dx = 3;
             dy = 6;
-            width =60;
-            height = 60;
+            width =90;
+            height = 90;
             isAlive = true;
             hitbox = new Rectangle(xpos, ypos, width, height);
             isCrashing = false;

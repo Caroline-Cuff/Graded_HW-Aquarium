@@ -18,8 +18,8 @@ public class telebox {
         ypos = pypos;
         dx = 3;
         dy = 6;
-        width =60;
-        height = 60;
+        width =100;
+        height = 120;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);
         isCrashing = false;

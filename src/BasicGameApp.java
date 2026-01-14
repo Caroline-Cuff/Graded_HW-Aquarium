@@ -25,110 +25,135 @@ import javax.swing.JPanel;
 
 public class BasicGameApp implements Runnable {
 
-   //Variable Definition Section
-   //Declare the variables used in the program 
-   //You can set their initial values too
-   
-   //Sets the width and height of the program window
-	final int WIDTH = 1000;
-	final int HEIGHT = 700;
+    //Variable Definition Section
+    //Declare the variables used in the program
+    //You can set their initial values too
 
-   //Declare the variables needed for the graphics
-	public JFrame frame;
-	public Canvas canvas;
-   public JPanel panel;
-   
-	public BufferStrategy bufferStrategy;
-	public Image teaPic;
+    //Sets the width and height of the program window
+    final int WIDTH = 1000;
+    final int HEIGHT = 700;
+
+    //Declare the variables needed for the graphics
+    public JFrame frame;
+    public Canvas canvas;
+    public JPanel panel;
+
+    public BufferStrategy bufferStrategy;
+    public Image teaPic;
     public Image queenPic;
     public Image backgroundpic;
     public Image crownpic;
     public Image telepic;
 
-   //Declare the objects used in the program
-   //These are things that are made up of more than one variable type
-	private tea earlg;
+    //Declare the objects used in the program
+    //These are things that are made up of more than one variable type
+    private tea earlg;
     private queen liz;
     private Crown coro;
     private telebox telebo;
 
 
-   // Main method definition
-   // This is the code that runs first and automatically
-	public static void main(String[] args) {
-		BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
-		new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method  
-
+    // Main method definition
+    // This is the code that runs first and automatically
+    public static void main(String[] args) {
+        BasicGameApp ex = new BasicGameApp();   //creates a new instance of the game
+        new Thread(ex).start();                 //creates a threads & starts up the code in the run( ) method
 
 
     }
 
 
+    // Constructor Method
+    // This has the same name as the class
+    // This section is the setup portion of the program
+    // Initialize your variables and construct your program objects here.
+    public BasicGameApp() {
 
+        setUpGraphics();
+        //randomness
+        // 10 is number of numbers, starts at 0
+        // eg 0-9
+        int randx = (int) (Math.random() * 10);
 
-   // Constructor Method
-   // This has the same name as the class
-   // This section is the setup portion of the program
-   // Initialize your variables and construct your program objects here.
-	public BasicGameApp() {
-      
-      setUpGraphics();
-       
-      //variable and objects
-      //create (construct) the objects needed for the game and load up 
-		teaPic = Toolkit.getDefaultToolkit().getImage("tea.jpg"); //load the picture
-		earlg = new tea(10,100);
+        //1-10
+        randx = (int) (Math.random() * 10) + 1;
+
+        //1-1000
+        randx = (int) (Math.random() * 1000) + 1;
+
+        //1-700
+        int randy = (int) (Math.random() * 700) + 1;
+
+        //variable and objects
+        //create (construct) the objects needed for the game and load up
+        teaPic = Toolkit.getDefaultToolkit().getImage("tea.jpg"); //load the picture
+        earlg = new tea(randx, randy);
         queenPic = Toolkit.getDefaultToolkit().getImage("queen.png");
-        liz = new queen (20,20);
+        liz = new queen(randx, randy);
         backgroundpic = Toolkit.getDefaultToolkit().getImage("backgrounduj.jpg");
         crownpic = Toolkit.getDefaultToolkit().getImage("crown.jpg");
-        coro = new Crown(50,25);
+        coro = new Crown(randx, randy);
         telepic = Toolkit.getDefaultToolkit().getImage("tbox.jpg");
-        telebo = new telebox(102,153);
+        telebo = new telebox(randx, randy);
 
 
+    }// BasicGameApp()
 
-	}// BasicGameApp()
 
-   
 //*******************************************************************************
 //User Method Section
 //
 // put your code to do things here.
 
-   // main thread
-   // this is the code that plays the game after you set things up
-	public void run() {
+    // main thread
+    // this is the code that plays the game after you set things up
+    public void run() {
 
-      //for the moment we will loop things forever.
-		while (true) {
+        //for the moment we will loop things forever.
+        while (true) {
 
-         moveThings();  //move all the game objects
-         render();  // paint the graphics
-         pause(20); // sleep for 10 ms
-		}
-	}
+            moveThings();  //move all the game objects
+            render();  // paint the graphics
+            pause(20); // sleep for 10 ms
+        }
+    }
 
 
-	public void moveThings()
-	{
-      //calls the move( ) code in the objects
-		earlg.move();
+    public void moveThings() {
+        //calls the move( ) code in the objects
+        earlg.move();
         liz.move();
         coro.move();
         telebo.move();
 
-	}
-	
+    }
+
+    public void crashing() {
+        // if astros crash into each other
+        if (liz.hitbox.intersects(earlg.hitbox)) {
+            System.out.println("CRASH");
+            liz.dx = -liz.dx;
+            earlg.dx = -earlg.dx;
+            liz.dy = -liz.dy;
+            earlg.dy = -earlg.dy;
+        }
+    }
+
+//        if (coro.hitbox.intersects(telebo.hitbox)) {
+//            System.out.println("CRASH AST");
+//
+//            coro.height = liz.height + 25;
+//
+//        }
+
+    }
+
    //Pauses or sleeps the computer for the amount specified in milliseconds
    public void pause(int time ){
    		//sleep
 			try {
 				Thread.sleep(time);
-			} catch (InterruptedException e) {
-
-			}
-   }
+			} catch (InterruptedException e) {}
 
    //Graphics setup method
    private void setUpGraphics() {

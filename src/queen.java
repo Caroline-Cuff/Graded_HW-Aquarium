@@ -19,10 +19,10 @@ public queen (int pxpos, int pypos){
 
     xpos = pxpos;
     ypos = pypos;
-    dx = 1;
-    dy = 1;
-    width =49;
-    height = 90;
+    dx = -7;
+    dy = 10;
+    width =98;
+    height = 180;
     isAlive = true;
     hitbox = new Rectangle(xpos, ypos, width, height);
     isCrashing = false;
@@ -31,7 +31,7 @@ public queen (int pxpos, int pypos){
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
         if (ypos>700) { // wrap at bottom wall
-            ypos = 1;
+            ypos = 0;
         }
         if (ypos < 0){
             ypos = 700;

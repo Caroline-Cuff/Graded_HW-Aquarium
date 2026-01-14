@@ -16,10 +16,10 @@ public class Crown {
 
         xpos = pxpos;
         ypos = pypos;
-        dx = 5;
+        dx = -4;
         dy = 5;
-        width = 45;
-        height = 45;
+        width = 90;
+        height = 90;
         isAlive = true;
         hitbox = new Rectangle(xpos, ypos, width, height);
         isCrashing = false;
