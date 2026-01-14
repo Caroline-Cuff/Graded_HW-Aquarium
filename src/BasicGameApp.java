@@ -41,11 +41,16 @@ public class BasicGameApp implements Runnable {
 	public BufferStrategy bufferStrategy;
 	public Image teaPic;
     public Image queenPic;
+    public Image backgroundpic;
+    public Image crownpic;
+    public Image telepic;
 
    //Declare the objects used in the program
    //These are things that are made up of more than one variable type
 	private tea earlg;
     private queen liz;
+    private Crown coro;
+    private telebox telebo;
 
 
    // Main method definition
@@ -75,6 +80,11 @@ public class BasicGameApp implements Runnable {
 		earlg = new tea(10,100);
         queenPic = Toolkit.getDefaultToolkit().getImage("queen.png");
         liz = new queen (20,20);
+        backgroundpic = Toolkit.getDefaultToolkit().getImage("backgrounduj.jpg");
+        crownpic = Toolkit.getDefaultToolkit().getImage("crown.jpg");
+        coro = new Crown(50,25);
+        telepic = Toolkit.getDefaultToolkit().getImage("tbox.jpg");
+        telebo = new telebox(102,153);
 
 
 
@@ -105,6 +115,8 @@ public class BasicGameApp implements Runnable {
       //calls the move( ) code in the objects
 		earlg.move();
         liz.move();
+        coro.move();
+        telebo.move();
 
 	}
 	
@@ -155,8 +167,12 @@ public class BasicGameApp implements Runnable {
 		g.clearRect(0, 0, WIDTH, HEIGHT);
 
       //draw the image of the astronaut
-		g.drawImage(teaPic, earlg.xpos, earlg.ypos, earlg.width, earlg.height, null);
+        g.drawImage(backgroundpic,0,0,WIDTH, HEIGHT,null);
+        g.drawImage(teaPic, earlg.xpos, earlg.ypos, earlg.width, earlg.height, null);
         g.drawImage(queenPic, liz.xpos, liz.ypos,liz.width, liz.height,null);
+        g.drawImage(crownpic,coro.xpos, coro.ypos, coro.width,coro.height,null);
+        g.drawImage(telepic,telebo.xpos, telebo.ypos, telebo.width, telebo.height, null);
+
 
 		g.dispose();
 

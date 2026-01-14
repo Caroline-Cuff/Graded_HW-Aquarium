@@ -1,3 +1,5 @@
+import java.awt.*;
+
 public class tea {
 
        //Variable Declaration
@@ -9,8 +11,8 @@ public class tea {
         public int width;
         public int height;
         public boolean isAlive; //a boolean to denote if the hero is alive or dead.
-//    public Rectangle hitbox;
-//    public Boolean isCrashing;
+        public Rectangle hitbox;
+        public Boolean isCrashing;
 
         public tea (int pxpos, int pypos){
 
@@ -18,16 +20,31 @@ public class tea {
             ypos = pypos;
             dx = 3;
             dy = 6;
-            width =30;
-            height = 30;
+            width =60;
+            height = 60;
             isAlive = true;
+            hitbox = new Rectangle(xpos, ypos, width, height);
+            isCrashing = false;
 
         }
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
         public void move() {
+            if (ypos>700) { // wrap at bottom wall
+                dy = -dy;
+            }
+            if (ypos < 0){
+                dy = -dy;
+            }
+            if (xpos > 1000 - width){
+                dx = -dx;
+            }
+            if (xpos <  0){
+                dx = -dx;
+            }
             xpos = xpos + dx;
             ypos = ypos + dy;
 
+            hitbox = new Rectangle(xpos,ypos, width, height);
         }
 
     }

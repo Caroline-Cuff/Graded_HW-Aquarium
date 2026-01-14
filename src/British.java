@@ -28,6 +28,7 @@ public class British {
         width = 49;
         height = 90;
         isAlive = true;
+
  
      // constructor
     }

@@ -1,10 +1,7 @@
 import java.awt.*;
 
-
-public class queen {
-
-//Variable Declaration
-public String name;                //holds the name of the hero
+public class telebox {
+    public String name;                //holds the name of the hero
     public int xpos;                //the x position
     public int ypos;                //the y position
     public int dx;                    //the speed of the hero in the x direction
@@ -15,39 +12,38 @@ public String name;                //holds the name of the hero
     public Rectangle hitbox;
     public Boolean isCrashing;
 
-public queen (int pxpos, int pypos){
+    public telebox (int pxpos, int pypos){
 
-    xpos = pxpos;
-    ypos = pypos;
-    dx = 1;
-    dy = 1;
-    width =49;
-    height = 90;
-    isAlive = true;
-    hitbox = new Rectangle(xpos, ypos, width, height);
-    isCrashing = false;
+        xpos = pxpos;
+        ypos = pypos;
+        dx = 3;
+        dy = 6;
+        width =60;
+        height = 60;
+        isAlive = true;
+        hitbox = new Rectangle(xpos, ypos, width, height);
+        isCrashing = false;
 
-}
+    }
     //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
     public void move() {
         if (ypos>700) { // wrap at bottom wall
-            ypos = 1;
+            dy = -dy;
         }
         if (ypos < 0){
-            ypos = 700;
+            dy = -dy;
         }
-        if (xpos > 1000){
-            xpos = 1;
+        if (xpos > 1000 - width){
+            dx = -dx;
         }
-        if (xpos < 0){
-            xpos = 1000;
+        if (xpos <  0){
+            dx = -dx;
         }
         xpos = xpos + dx;
         ypos = ypos + dy;
 
         hitbox = new Rectangle(xpos,ypos, width, height);
     }
-
 
 
 }
