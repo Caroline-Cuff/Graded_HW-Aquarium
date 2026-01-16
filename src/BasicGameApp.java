@@ -144,6 +144,11 @@ public class BasicGameApp implements Runnable {
         if (telebox.hitbox.intersects(coro.hitbox)&&coro.isCrashing==false){
             System.out.println("T/C");
             coro.isCrashing = true;
+            telebox.isAlive = false;
+            telebox.dx = -telebox.dx;
+            telebox.dy = -telebox.dy;
+            coro.dx = coro.dy;
+            coro.dy = coro.dx;
         }
         if (!telebox.hitbox.intersects(coro.hitbox)){
             coro.isCrashing = false;
@@ -154,7 +159,7 @@ public class BasicGameApp implements Runnable {
         if (liz.hitbox.intersects(coro.hitbox)&& coro.isCrashing == false ){
             System.out.println("CONGRATS!");
             telebox.isAlive = false;
-            earlg.isAlive=false;
+            earlg.isAlive =false;
             coro.isCrashing = true;
         }
         if (!liz.hitbox.intersects(coro.hitbox)){
