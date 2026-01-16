@@ -8,8 +8,8 @@ public class telebox {
     public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
-    public boolean isAlive; //a boolean to denote if the hero is alive or dead.
-    public Rectangle hitbox;
+    public static boolean isAlive; //a boolean to denote if the hero is alive or dead.
+    public static Rectangle hitbox;
     public Boolean isCrashing;
 
     public telebox (int pxpos, int pypos){
@@ -17,7 +17,7 @@ public class telebox {
         xpos = pxpos;
         ypos = pypos;
         dx = 3;
-        dy = 6;
+        dy = 4;
         width =100;
         height = 120;
         isAlive = true;

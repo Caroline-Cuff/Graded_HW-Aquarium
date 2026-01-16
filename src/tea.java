@@ -18,8 +18,8 @@ public class tea {
 
             xpos = pxpos;
             ypos = pypos;
-            dx = 3;
-            dy = 6;
+            dx = 2;
+            dy = 1;
             width =90;
             height = 90;
             isAlive = true;

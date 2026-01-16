@@ -126,26 +126,46 @@ public class BasicGameApp implements Runnable {
         liz.move();
         coro.move();
         telebo.move();
+        crashing();
 
     }
 
     public void crashing() {
         // if astros crash into each other
-        if (liz.hitbox.intersects(earlg.hitbox)) {
+        if (liz.hitbox.intersects(earlg.hitbox)&& earlg.isCrashing==false) {
             System.out.println("CRASH");
+            liz.isCrashing = true;
             liz.dx = -liz.dx;
             earlg.dx = -earlg.dx;
             liz.dy = -liz.dy;
             earlg.dy = -earlg.dy;
+            earlg.isCrashing = true;
         }
+        if (telebox.hitbox.intersects(coro.hitbox)&&coro.isCrashing==false){
+            System.out.println("T/C");
+            coro.isCrashing = true;
+        }
+        if (!telebox.hitbox.intersects(coro.hitbox)){
+            coro.isCrashing = false;
+        }
+        if (!liz.hitbox.intersects(earlg.hitbox)){
+            earlg.isCrashing = false;
+        }
+        if (liz.hitbox.intersects(coro.hitbox)&& coro.isCrashing == false ){
+            System.out.println("CONGRATS!");
+            telebox.isAlive = false;
+            earlg.isAlive=false;
+            coro.isCrashing = true;
+        }
+        if (!liz.hitbox.intersects(coro.hitbox)){
+            coro.isCrashing = false;
+        }
+
+
+
     }
 
-//        if (coro.hitbox.intersects(telebo.hitbox)) {
-//            System.out.println("CRASH AST");
-//
-//            coro.height = liz.height + 25;
-//
-//        }
+
 
 
 
