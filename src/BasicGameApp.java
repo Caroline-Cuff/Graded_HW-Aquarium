@@ -131,7 +131,7 @@ public class BasicGameApp implements Runnable {
     }
 
     public void crashing() {
-        // if astros crash into each other
+        // if queen crashes into tea - switch direction of both
         if (liz.hitbox.intersects(earlg.hitbox)&& earlg.isCrashing==false) {
             System.out.println("CRASH");
             liz.isCrashing = true;
@@ -141,28 +141,41 @@ public class BasicGameApp implements Runnable {
             earlg.dy = -earlg.dy;
             earlg.isCrashing = true;
         }
-        if (telebox.hitbox.intersects(coro.hitbox)&& coro.isCrashing==false){
+        if (!liz.hitbox.intersects(earlg.hitbox) && liz.isCrashing == true){
+            earlg.isCrashing = false;}
+
+        // if box hits crown - box swap directions, crown swap values
+        if (telebo.hitbox.intersects(coro.hitbox)&& coro.isCrashing==false){
             System.out.println("T/C");
             coro.isCrashing = true;
-            telebox.isAlive = false;
-            telebox.dx = -telebox.dx;
-            telebox.dy = -telebox.dy;
+            telebo.isAlive = false;
+            telebo.dx = -telebo.dx;
+            telebo.dy = -telebo.dy;
             coro.dx = coro.dy;
             coro.dy = coro.dx;
         }
-        if (!telebox.hitbox.intersects(coro.hitbox) && telebox.isCrashing == true){ // telebo vs telebox?
+        if (!telebo.hitbox.intersects(coro.hitbox) && telebo.isCrashing == true){
             coro.isCrashing = false;
         }
-        if (!liz.hitbox.intersects(earlg.hitbox) && liz.isCrashing == true){
-            earlg.isCrashing = false;
-        }
+
+       // if queen hits crown - crown grow, swap both directions
+        // make the other two vanish?
         if (liz.hitbox.intersects(coro.hitbox)&& coro.isCrashing == false ){
             System.out.println("CONGRATS!");
-            telebox.isAlive = false;
+            telebo.isAlive = false;
             earlg.isAlive =false;
             coro.isCrashing = true;
-            coro.width = coro.width * 2;
-            coro.height = coro.height * 2;
+            liz.dx = -liz.dx;
+            liz.dy = -liz.dy;
+            coro.dx = - coro.dx;
+            coro.dy = -coro.dy;
+            if (coro.width < 630){
+                 coro.width = (int) (coro.width * 1.1);
+                 coro.height = (int) (coro.height * 1.1);}
+            else {
+                coro.width = (int)(coro.width / 1.2);
+                coro.height = (int)(coro.height/1.2);
+            }
         }
         if (!liz.hitbox.intersects(coro.hitbox) && liz.isCrashing == true){
             coro.isCrashing = false;
@@ -171,26 +184,32 @@ public class BasicGameApp implements Runnable {
 
         //not shrinking if too big. hitbox not fit?
         //isalive does not work?
+        // if crown hits tea - crown shrink, change tea direction
         if (coro.hitbox.intersects(earlg.hitbox) && coro.isCrashing == false){
             System.out.println("crown/tea");
             coro.isAlive = false;
             coro.isCrashing = true;
-            coro.width = coro.width /2;
-            coro.height = coro.height /2;
-            earlg.dx = -earlg.dx;
+            if (coro.width > 5 ){
+                 coro.width = coro.width /2;
+                 coro.height = coro.height /2;}
+            else{
+                coro.width = (int) (coro.width*1.5);
+                coro.height = (int)(coro.height*1.5);
+            }
+            earlg.dx = earlg.dx + 3;
 
         }
         if (!coro.hitbox.intersects(earlg.hitbox) && coro.isCrashing == true){
             coro.isCrashing = false;
         }
 
-        if (liz.hitbox.intersects(telebox.hitbox)&&liz.isCrashing == false){
+        if (liz.hitbox.intersects(telebo.hitbox)&&liz.isCrashing == false){
             liz.isCrashing = true;
             System.out.println("Ewwww");
-            telebox.dx = -telebox.dx;
+            telebo.dx = -telebo.dx;
 
         }
-        if (!liz.hitbox.intersects(telebox.hitbox)&& liz.isCrashing == true){
+        if (!liz.hitbox.intersects(telebo.hitbox)&& liz.isCrashing == true){
             liz.isCrashing=false;
         }
 
@@ -252,12 +271,17 @@ private void render() {
     Graphics2D g = (Graphics2D) bufferStrategy.getDrawGraphics();
     g.clearRect(0, 0, WIDTH, HEIGHT);
 
+
     //draw the image of the astronaut
     g.drawImage(backgroundpic, 0, 0, WIDTH, HEIGHT, null);
-    g.drawImage(teaPic, earlg.xpos, earlg.ypos, earlg.width, earlg.height, null);
+    if (earlg.isAlive == true){
+    g.drawImage(teaPic, earlg.xpos, earlg.ypos, earlg.width, earlg.height, null);}
     g.drawImage(queenPic, liz.xpos, liz.ypos, liz.width, liz.height, null);
     g.drawImage(crownpic, coro.xpos, coro.ypos, coro.width, coro.height, null);
-    g.drawImage(telepic, telebo.xpos, telebo.ypos, telebo.width, telebo.height, null);
+    if (telebo.isAlive == true){
+    g.drawImage(telepic, telebo.xpos, telebo.ypos, telebo.width, telebo.height, null);}
+
+    g.drawRect(coro.hitbox.x,coro.hitbox.y, coro.hitbox.width, coro.hitbox.height);
 
 
     g.dispose();

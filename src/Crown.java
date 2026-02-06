@@ -16,8 +16,8 @@ public class Crown {
 
         xpos = pxpos;
         ypos = pypos;
-        dx = -4;
-        dy = 5;
+        dx = -8;
+        dy = 4;
         width = 90;
         height = 90;
         isAlive = true;

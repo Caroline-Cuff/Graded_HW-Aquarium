@@ -4,12 +4,12 @@ public class telebox {
     public String name;                //holds the name of the hero
     public int xpos;                //the x position
     public int ypos;                //the y position
-    public static int dx;                    //the speed of the hero in the x direction
-    public static int dy;                    //the speed of the hero in the y direction
+    public int dx;                    //the speed of the hero in the x direction
+    public int dy;                    //the speed of the hero in the y direction
     public int width;
     public int height;
-    public static boolean isAlive; //a boolean to denote if the hero is alive or dead.
-    public static Rectangle hitbox;
+    public boolean isAlive; //a boolean to denote if the hero is alive or dead.
+    public Rectangle hitbox;
     public Boolean isCrashing;
 
     public telebox (int pxpos, int pypos){
