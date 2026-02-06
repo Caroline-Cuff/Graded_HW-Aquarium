@@ -141,7 +141,7 @@ public class BasicGameApp implements Runnable {
             earlg.dy = -earlg.dy;
             earlg.isCrashing = true;
         }
-        if (telebox.hitbox.intersects(coro.hitbox)&&coro.isCrashing==false){
+        if (telebox.hitbox.intersects(coro.hitbox)&& coro.isCrashing==false){
             System.out.println("T/C");
             coro.isCrashing = true;
             telebox.isAlive = false;
@@ -150,10 +150,10 @@ public class BasicGameApp implements Runnable {
             coro.dx = coro.dy;
             coro.dy = coro.dx;
         }
-        if (!telebox.hitbox.intersects(coro.hitbox)){
+        if (!telebox.hitbox.intersects(coro.hitbox) && telebox.isCrashing == true){ // telebo vs telebox?
             coro.isCrashing = false;
         }
-        if (!liz.hitbox.intersects(earlg.hitbox)){
+        if (!liz.hitbox.intersects(earlg.hitbox) && liz.isCrashing == true){
             earlg.isCrashing = false;
         }
         if (liz.hitbox.intersects(coro.hitbox)&& coro.isCrashing == false ){
@@ -161,15 +161,48 @@ public class BasicGameApp implements Runnable {
             telebox.isAlive = false;
             earlg.isAlive =false;
             coro.isCrashing = true;
+            coro.width = coro.width * 2;
+            coro.height = coro.height * 2;
         }
-        if (!liz.hitbox.intersects(coro.hitbox)){
+        if (!liz.hitbox.intersects(coro.hitbox) && liz.isCrashing == true){
             coro.isCrashing = false;
+        }
+
+
+        //not shrinking if too big. hitbox not fit?
+        //isalive does not work?
+        if (coro.hitbox.intersects(earlg.hitbox) && coro.isCrashing == false){
+            System.out.println("crown/tea");
+            coro.isAlive = false;
+            coro.isCrashing = true;
+            coro.width = coro.width /2;
+            coro.height = coro.height /2;
+            earlg.dx = -earlg.dx;
+
+        }
+        if (!coro.hitbox.intersects(earlg.hitbox) && coro.isCrashing == true){
+            coro.isCrashing = false;
+        }
+
+        if (liz.hitbox.intersects(telebox.hitbox)&&liz.isCrashing == false){
+            liz.isCrashing = true;
+            System.out.println("Ewwww");
+            telebox.dx = -telebox.dx;
+
+        }
+        if (!liz.hitbox.intersects(telebox.hitbox)&& liz.isCrashing == true){
+            liz.isCrashing=false;
         }
 
 
 
     }
 
+
+    // queen (telephone, crown [yes], tea [yes] )
+    //telephone ( crown [yes] , tea [yes])
+    //crown (tea)
+    // tea
 
 
 
