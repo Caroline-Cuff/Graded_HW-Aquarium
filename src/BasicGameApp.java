@@ -45,6 +45,7 @@ public class BasicGameApp implements Runnable {
     public Image backgroundpic;
     public Image crownpic;
     public Image telepic;
+    public Image congrats;
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -92,6 +93,7 @@ public class BasicGameApp implements Runnable {
         queenPic = Toolkit.getDefaultToolkit().getImage("queen.png");
         liz = new queen(randx, randy);
         backgroundpic = Toolkit.getDefaultToolkit().getImage("backgrounduj.jpg");
+        congrats = Toolkit.getDefaultToolkit().getImage("Congrats.png");
         crownpic = Toolkit.getDefaultToolkit().getImage("crown.jpg");
         coro = new Crown(randx, randy);
         telepic = Toolkit.getDefaultToolkit().getImage("tbox.jpg");
@@ -164,6 +166,7 @@ public class BasicGameApp implements Runnable {
             System.out.println("CONGRATS!");
             telebo.isAlive = false;
             earlg.isAlive =false;
+            coro.isAlive = false;
             coro.isCrashing = true;
             liz.dx = -liz.dx;
             liz.dy = -liz.dy;
@@ -282,7 +285,7 @@ private void render() {
     g.drawImage(telepic, telebo.xpos, telebo.ypos, telebo.width, telebo.height, null);}
 
     g.drawRect(coro.hitbox.x,coro.hitbox.y, coro.hitbox.width, coro.hitbox.height);
-
+    g.drawImage(congrats,0,0, WIDTH,HEIGHT, null);
 
     g.dispose();
 
