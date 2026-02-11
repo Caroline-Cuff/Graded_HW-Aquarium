@@ -46,6 +46,7 @@ public class BasicGameApp implements Runnable {
     public Image crownpic;
     public Image telepic;
     public Image congrats;
+    public Image Crash;
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -54,6 +55,7 @@ public class BasicGameApp implements Runnable {
     private Crown coro;
     private telebox telebo;
     private Congrats endScreen;
+    private Crash kaboom;
 
 
     // Main method definition
@@ -100,6 +102,8 @@ public class BasicGameApp implements Runnable {
         coro = new Crown(randx, randy);
         telepic = Toolkit.getDefaultToolkit().getImage("tbox.jpg");
         telebo = new telebox(randx, randy);
+        Crash = Toolkit.getDefaultToolkit().getImage("crash.jpg");
+        kaboom = new Crash(225,0);
 
 
     }// BasicGameApp()
@@ -134,17 +138,22 @@ public class BasicGameApp implements Runnable {
 
     }
 
+    //todo: telebox + tea
+
     public void crashing() {
         // if queen crashes into tea - switch direction of both
         if (liz.hitbox.intersects(earlg.hitbox) && earlg.isCrashing == false) {
               System.out.println("CRASH");
-            // imput crashing image. only for 1 sec?
+            //todo: imput crashing image. only for 1 sec?
             liz.isCrashing = true;
+            kaboom.isAlive = true;
             liz.dx = -liz.dx;
             earlg.dx = -earlg.dx;
             liz.dy = -liz.dy;
             earlg.dy = -earlg.dy;
             earlg.isCrashing = true;
+            pause(2);
+            kaboom.isAlive = false;
         }
         if (!liz.hitbox.intersects(earlg.hitbox) && liz.isCrashing == true) {
             earlg.isCrashing = false;
@@ -179,10 +188,10 @@ public class BasicGameApp implements Runnable {
                 endScreen.isAlive = true;
 
             }
-//            if (!liz.hitbox.intersects(coro.hitbox) && liz.isCrashing == true) {
-//                coro.isCrashing = false;
-//                liz.isCrashing = false;
-//            }
+            if (!liz.hitbox.intersects(coro.hitbox) && liz.isCrashing == true) {
+                coro.isCrashing = false;
+                liz.isCrashing = false;
+            }
 
 
             //not shrinking if too big. hitbox not fit?
@@ -290,6 +299,10 @@ private void render() {
     g.drawRect(coro.hitbox.x,coro.hitbox.y, coro.hitbox.width, coro.hitbox.height);
     if (endScreen.isAlive == true) {
         g.drawImage(congrats, 0, 0, WIDTH, HEIGHT, null);
+    }
+    if (kaboom.isAlive == true){
+        g.drawImage(Crash,2, 0, WIDTH, HEIGHT, null);
+
     }
     g.dispose();
 
