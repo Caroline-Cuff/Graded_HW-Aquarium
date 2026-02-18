@@ -29,7 +29,7 @@ public class tea {
         }
         //The move method.  Everytime this is run (or "called") the hero's x position and y position change by dx and dy
         public void move() {
-            if (ypos>700) { // wrap at bottom wall
+            if (ypos>700) { // bounce at bottom wall
                 dy = -dy;
             }
             if (ypos < 0){

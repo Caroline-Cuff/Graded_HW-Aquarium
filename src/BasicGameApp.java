@@ -46,7 +46,6 @@ public class BasicGameApp implements Runnable {
     public Image crownpic;
     public Image telepic;
     public Image congrats;
-    public Image Crash;
 
     //Declare the objects used in the program
     //These are things that are made up of more than one variable type
@@ -55,7 +54,7 @@ public class BasicGameApp implements Runnable {
     private Crown coro;
     private telebox telebo;
     private Congrats endScreen;
-    private Crash kaboom;
+
 
 
     // Main method definition
@@ -102,8 +101,8 @@ public class BasicGameApp implements Runnable {
         coro = new Crown(randx, randy);
         telepic = Toolkit.getDefaultToolkit().getImage("tbox.jpg");
         telebo = new telebox(randx, randy);
-        Crash = Toolkit.getDefaultToolkit().getImage("crash.jpg");
-        kaboom = new Crash(225,0);
+       // kaboom = new Crash(225,0);
+
 
 
     }// BasicGameApp()
@@ -146,14 +145,13 @@ public class BasicGameApp implements Runnable {
               System.out.println("CRASH");
             //todo: imput crashing image. only for 1 sec?
             liz.isCrashing = true;
-            kaboom.isAlive = true;
+            //kaboom.isAlive = true;
             liz.dx = -liz.dx;
             earlg.dx = -earlg.dx;
             liz.dy = -liz.dy;
             earlg.dy = -earlg.dy;
             earlg.isCrashing = true;
-            pause(2);
-            kaboom.isAlive = false;
+
         }
         if (!liz.hitbox.intersects(earlg.hitbox) && liz.isCrashing == true) {
             earlg.isCrashing = false;
@@ -179,13 +177,19 @@ public class BasicGameApp implements Runnable {
                 System.out.println("CONGRATS!");
                 telebo.isAlive = false;
                 earlg.isAlive = false;
-                coro.isAlive = false;
                 coro.isCrashing = true;
                 liz.dx = -liz.dx;
                 liz.dy = -liz.dy;
                 coro.dx = -coro.dx;
                 coro.dy = -coro.dy;
                 endScreen.isAlive = true;
+                liz.dx = 0;
+                liz.dy = 0;
+                liz.xpos = 451;
+                liz.ypos = 500;
+                coro.isAlive = false;
+
+
 
             }
             if (!liz.hitbox.intersects(coro.hitbox) && liz.isCrashing == true) {
@@ -289,21 +293,25 @@ private void render() {
 
     //draw the image of the astronaut
     g.drawImage(backgroundpic, 0, 0, WIDTH, HEIGHT, null);
-    if (earlg.isAlive == true){
-    g.drawImage(teaPic, earlg.xpos, earlg.ypos, earlg.width, earlg.height, null);}
+    if (earlg.isAlive == true) {
+        g.drawImage(teaPic, earlg.xpos, earlg.ypos, earlg.width, earlg.height, null);
+    }
     g.drawImage(queenPic, liz.xpos, liz.ypos, liz.width, liz.height, null);
+    if (coro.isAlive == true){
     g.drawImage(crownpic, coro.xpos, coro.ypos, coro.width, coro.height, null);
-    if (telebo.isAlive == true){
-    g.drawImage(telepic, telebo.xpos, telebo.ypos, telebo.width, telebo.height, null);}
-
-    g.drawRect(coro.hitbox.x,coro.hitbox.y, coro.hitbox.width, coro.hitbox.height);
-    if (endScreen.isAlive == true) {
-        g.drawImage(congrats, 0, 0, WIDTH, HEIGHT, null);
+    g.drawRect(coro.hitbox.x, coro.hitbox.y, coro.hitbox.width, coro.hitbox.height);}
+    if (telebo.isAlive == true) {
+        g.drawImage(telepic, telebo.xpos, telebo.ypos, telebo.width, telebo.height, null);
     }
-    if (kaboom.isAlive == true){
-        g.drawImage(Crash,2, 0, WIDTH, HEIGHT, null);
 
+
+    if (endScreen.isAlive == true){
+        g.drawImage(congrats, endScreen.width, endScreen.height, null);
     }
+
+
+
+
     g.dispose();
 
     bufferStrategy.show();
